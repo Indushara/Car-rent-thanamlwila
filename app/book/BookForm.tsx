@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import Button from '@/components/Button';
 import { cars } from '@/data/cars';
 import { Car, Reservation } from '@/types/car';
 import { saveReservation } from '@/utils/reservations';
@@ -86,13 +87,10 @@ export default function BookForm({ initialCarId }: BookFormProps) {
 
   return (
     <form onSubmit={handleSubmit} className="grid md:grid-cols-2 gap-8">
-      {/* Left Column - Your Trip */}
       <div className="space-y-6">
         <div>
           <h2 className="text-2xl font-bold text-white mb-2">Your trip</h2>
-          <p className="text-gray-400 text-sm mb-6">
-            Choose a car and dates. Your estimate updates automatically.
-          </p>
+          <p className="text-gray-400 text-sm mb-6">Choose a car and dates. Your estimate updates automatically.</p>
         </div>
         
         <div>
@@ -112,26 +110,6 @@ export default function BookForm({ initialCarId }: BookFormProps) {
               </option>
             ))}
           </select>
-          
-          {selectedCar && (
-            <div className="mt-4 bg-white rounded-lg p-6 relative overflow-hidden">
-              <div className="absolute top-2 left-2 text-gray-400 text-sm">{selectedCar.type}</div>
-              <div className="absolute top-2 right-2 w-16 h-16 rounded-full bg-opacity-30 bg-green-100"></div>
-              <div className="flex justify-center items-center h-32">
-                <div className="w-32 h-16 bg-gray-700 rounded-lg relative">
-                  <div className="absolute bottom-0 left-2 right-2 h-3 bg-gray-600 rounded-full"></div>
-                  <div className="absolute bottom-0 left-4 w-6 h-6 bg-gray-500 rounded-full"></div>
-                  <div className="absolute bottom-0 right-4 w-6 h-6 bg-gray-500 rounded-full"></div>
-                </div>
-              </div>
-              <div className="text-center mt-4">
-                <h3 className="font-bold text-black">{selectedCar.name}</h3>
-                <p className="text-gray-600 text-sm">
-                  {selectedCar.type} • {selectedCar.transmission} • {selectedCar.seats} seats • {selectedCar.bags} bags
-                </p>
-              </div>
-            </div>
-          )}
         </div>
         
         <div>
@@ -180,13 +158,10 @@ export default function BookForm({ initialCarId }: BookFormProps) {
         </div>
       </div>
       
-      {/* Right Column - Driver Details */}
       <div className="space-y-6">
         <div>
           <h2 className="text-2xl font-bold text-white mb-2">Driver details</h2>
-          <p className="text-gray-400 text-sm mb-6">
-            We'll use this to confirm your reservation.
-          </p>
+          <p className="text-gray-400 text-sm mb-6">We'll use this to confirm your reservation.</p>
         </div>
         
         <div>
@@ -296,12 +271,9 @@ export default function BookForm({ initialCarId }: BookFormProps) {
           </div>
         )}
         
-        <button
-          type="submit"
-          className="w-full bg-white text-black px-6 py-3 rounded font-bold hover:bg-gray-100 transition"
-        >
+        <Button type="submit" variant="primary" size="lg" fullWidth>
           Reserve Now
-        </button>
+        </Button>
       </div>
     </form>
   );

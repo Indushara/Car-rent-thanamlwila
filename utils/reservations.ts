@@ -4,15 +4,30 @@ const STORAGE_KEY = 'car_rental_reservations';
 
 export function getReservations(): Reservation[] {
   if (typeof window === 'undefined') return [];
-  const stored = localStorage.getItem(STORAGE_KEY);
-  return stored ? JSON.parse(stored) : [];
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (!stored) return [];
+    const parsed = JSON.parse(stored);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch (error) {
+    console.error('Error parsing reservations from localStorage:', error);
+    // Clear invalid data
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem(STORAGE_KEY);
+    }
+    return [];
+  }
 }
 
 export function saveReservation(reservation: Reservation): void {
   if (typeof window === 'undefined') return;
-  const reservations = getReservations();
-  reservations.push(reservation);
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(reservations));
+  try {
+    const reservations = getReservations();
+    reservations.push(reservation);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(reservations));
+  } catch (error) {
+    console.error('Error saving reservation:', error);
+  }
 }
 
 export function clearAllReservations(): void {
