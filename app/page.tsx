@@ -1,15 +1,55 @@
 import Link from 'next/link';
-import Navbar from '@/components/Navbar';
-import CarCard from '@/components/CarCard';
-import { cars } from '@/data/cars';
+import Button from '@/components/Button';
 
 export default function Home() {
-  const popularCars = cars.slice(0, 3);
-
   return (
-    <div className="min-h-screen bg-black">
-      <Navbar />
-      
+    <div className="min-h-screen bg-black text-white">
+      {/* Navigation */}
+      <nav className="flex items-center justify-between px-6 py-4 bg-black text-white">
+        <div className="flex items-center gap-2 shrink-0">
+          <div className="w-10 h-10 rounded-full border-2 border-white flex items-center justify-center bg-black">
+            <span className="text-white font-bold text-sm">TR</span>
+          </div>
+          <Link href="/" className="text-white font-semibold hover:opacity-80 whitespace-nowrap">
+            Thanamlwila Car Rental
+          </Link>
+        </div>
+        
+        <div className="hidden lg:flex items-center gap-6 flex-1 justify-center">
+          <Link href="/cars" className="text-white hover:opacity-80 transition">
+            Cars
+          </Link>
+          <Link href="/book" className="text-white hover:opacity-80 transition">
+            Book
+          </Link>
+          <Link href="/contact" className="text-white hover:opacity-80 transition">
+            Contact
+          </Link>
+          <Link href="/reservations" className="text-white hover:opacity-80 transition">
+            Reservations
+          </Link>
+        </div>
+        
+        <div className="flex items-center gap-1 ml-4 lg:ml-0">
+          <Button
+            href="/cars"
+            variant="primary"
+            size="sm"
+            className="whitespace-nowrap"
+          >
+            Browse cars
+          </Button>
+          <Button
+            href="/book"
+            variant="secondary"
+            size="sm"
+            className="whitespace-nowrap"
+          >
+            Book now
+          </Button>
+        </div>
+      </nav>
+
       {/* Hero Section */}
       <section className="px-6 py-16 md:py-24">
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
@@ -20,18 +60,20 @@ export default function Home() {
               CAR<br />RENTAL
             </h1>
             <div className="flex gap-4">
-              <Link
+              <Button
                 href="/cars"
-                className="px-6 py-3 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
+                variant="primary"
+                size="lg"
               >
                 LEARN MORE
-              </Link>
-              <Link
+              </Button>
+              <Button
                 href="/book"
-                className="px-6 py-3 border-2 border-yellow-400 text-white rounded hover:bg-yellow-400 hover:text-black transition flex items-center gap-2"
+                variant="outline"
+                size="lg"
               >
-                PRICING <span>&gt;</span>
-              </Link>
+                PRICING &gt;
+              </Button>
             </div>
           </div>
           
@@ -63,9 +105,12 @@ export default function Home() {
           </p>
           
           <div className="grid md:grid-cols-3 gap-6">
-            {popularCars.map((car) => (
-              <CarCard key={car.id} car={car} />
-            ))}
+            <div className="bg-gray-800 rounded-lg p-6">
+              <div className="text-center text-gray-400 mb-4">Car cards will appear here</div>
+              <Button href="/cars" variant="outline" fullWidth>
+                View All Cars
+              </Button>
+            </div>
           </div>
         </div>
       </section>

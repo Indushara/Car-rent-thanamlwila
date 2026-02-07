@@ -1,7 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import Navbar from '@/components/Navbar';
+import Link from 'next/link';
+import Button from '@/components/Button';
 
 export default function ContactPage() {
   const [name, setName] = useState('');
@@ -17,8 +18,29 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="min-h-screen bg-black">
-      <Navbar />
+    <div className="min-h-screen bg-black text-white">
+      <nav className="flex items-center justify-between px-6 py-4 bg-black text-white">
+        <div className="flex items-center gap-2 shrink-0">
+          <div className="w-10 h-10 rounded-full border-2 border-white flex items-center justify-center bg-black">
+            <span className="text-white font-bold text-sm">TR</span>
+          </div>
+          <Link href="/" className="text-white font-semibold hover:opacity-80 whitespace-nowrap">
+            Thanamlwila Car Rental
+          </Link>
+        </div>
+        
+        <div className="hidden lg:flex items-center gap-6 flex-1 justify-center">
+          <Link href="/cars" className="text-white hover:opacity-80 transition">Cars</Link>
+          <Link href="/book" className="text-white hover:opacity-80 transition">Book</Link>
+          <Link href="/contact" className="text-white hover:opacity-80 transition">Contact</Link>
+          <Link href="/reservations" className="text-white hover:opacity-80 transition">Reservations</Link>
+        </div>
+        
+        <div className="flex items-center gap-1 ml-4 lg:ml-0">
+          <Button href="/cars" variant="primary" size="sm" className="whitespace-nowrap">Browse cars</Button>
+          <Button href="/book" variant="secondary" size="sm" className="whitespace-nowrap">Book now</Button>
+        </div>
+      </nav>
       
       <div className="px-6 py-12 max-w-7xl mx-auto">
         <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">Contact</h1>
@@ -27,7 +49,6 @@ export default function ContactPage() {
         </p>
         
         <div className="grid md:grid-cols-2 gap-8">
-          {/* Left Column - Contact Form */}
           <div className="bg-gray-800 rounded-lg p-8">
             <h2 className="text-2xl font-bold text-white mb-6">Send a message</h2>
             <form onSubmit={handleSubmit} className="space-y-6">
@@ -67,12 +88,9 @@ export default function ContactPage() {
                 />
               </div>
               
-              <button
-                type="submit"
-                className="w-full bg-white text-black px-6 py-3 rounded font-bold hover:bg-gray-100 transition"
-              >
+              <Button type="submit" variant="secondary" size="lg" fullWidth>
                 Send (demo)
-              </button>
+              </Button>
               
               <p className="text-gray-400 text-sm">
                 This demo form doesn't send emails yet. If you want, I can wire it to email, WhatsApp, or a backend API.
@@ -80,7 +98,6 @@ export default function ContactPage() {
             </form>
           </div>
           
-          {/* Right Column - Business Details */}
           <div className="bg-gray-800 rounded-lg p-8">
             <div className="bg-gray-100 rounded-lg p-8 mb-6 relative overflow-hidden">
               <div className="absolute top-4 left-4 w-16 h-32 bg-gray-700 rounded-lg"></div>
@@ -91,8 +108,6 @@ export default function ContactPage() {
                   <div className="w-2 h-2 bg-gray-600 rounded-full"></div>
                 </div>
               </div>
-              <div className="absolute top-12 right-12 w-12 h-12 rounded-full bg-blue-200 opacity-50"></div>
-              <div className="absolute bottom-8 left-12 w-10 h-10 rounded-full bg-green-200 opacity-50"></div>
             </div>
             
             <div className="mb-6">

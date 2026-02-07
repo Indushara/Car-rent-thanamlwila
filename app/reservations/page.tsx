@@ -2,9 +2,9 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import Navbar from '@/components/Navbar';
-import { Reservation } from '@/types/car';
+import Button from '@/components/Button';
 import { getReservations, clearAllReservations, exportReservations } from '@/utils/reservations';
+import { Reservation } from '@/types/car';
 
 export default function ReservationsPage() {
   const [reservations, setReservations] = useState<Reservation[]>([]);
@@ -46,8 +46,29 @@ export default function ReservationsPage() {
   const estimatedTotal = reservations.reduce((sum, r) => sum + calculateTotal(r), 0);
 
   return (
-    <div className="min-h-screen bg-black">
-      <Navbar />
+    <div className="min-h-screen bg-black text-white">
+      <nav className="flex items-center justify-between px-6 py-4 bg-black text-white">
+        <div className="flex items-center gap-2 shrink-0">
+          <div className="w-10 h-10 rounded-full border-2 border-white flex items-center justify-center bg-black">
+            <span className="text-white font-bold text-sm">TR</span>
+          </div>
+          <Link href="/" className="text-white font-semibold hover:opacity-80 whitespace-nowrap">
+            Thanamlwila Car Rental
+          </Link>
+        </div>
+        
+        <div className="hidden lg:flex items-center gap-6 flex-1 justify-center">
+          <Link href="/cars" className="text-white hover:opacity-80 transition">Cars</Link>
+          <Link href="/book" className="text-white hover:opacity-80 transition">Book</Link>
+          <Link href="/contact" className="text-white hover:opacity-80 transition">Contact</Link>
+          <Link href="/reservations" className="text-white hover:opacity-80 transition">Reservations</Link>
+        </div>
+        
+        <div className="flex items-center gap-1 ml-4 lg:ml-0">
+          <Button href="/cars" variant="primary" size="sm" className="whitespace-nowrap">Browse cars</Button>
+          <Button href="/book" variant="secondary" size="sm" className="whitespace-nowrap">Book now</Button>
+        </div>
+      </nav>
       
       <div className="px-6 py-12 max-w-7xl mx-auto">
         <div className="flex justify-between items-start mb-8">
@@ -58,18 +79,12 @@ export default function ReservationsPage() {
             </p>
           </div>
           <div className="flex gap-3">
-            <button
-              onClick={handleExport}
-              className="px-4 py-2 border border-white text-white rounded hover:bg-gray-800 transition"
-            >
+            <Button variant="outline" size="md" onClick={handleExport}>
               Export JSON
-            </button>
-            <button
-              onClick={handleClearAll}
-              className="px-4 py-2 bg-white text-black rounded hover:bg-gray-100 transition"
-            >
+            </Button>
+            <Button variant="danger" size="md" onClick={handleClearAll}>
               Clear all
-            </button>
+            </Button>
           </div>
         </div>
         
